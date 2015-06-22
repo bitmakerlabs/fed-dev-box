@@ -14,7 +14,7 @@ apt-get -y update >/dev/null 2>&1
 
 install 'development tools' build-essential
 
-install Ruby ruby2.2
+install Ruby ruby2.2 ruby2.2-dev
 update-alternatives --set ruby /usr/bin/ruby2.2 >/dev/null 2>&1
 update-alternatives --set gem /usr/bin/gem2.2 >/dev/null 2>&1
 
@@ -22,12 +22,12 @@ echo installing Bundler
 gem install bundler -N >/dev/null 2>&1
 
 install Git git
-install SQLite sqlite3
+install SQLite sqlite3 libsqlite3-dev
 
-install PostgreSQL postgresql postgresql-contrib
+install PostgreSQL postgresql postgresql-contrib libpq-dev
 sudo -u postgres createuser --superuser vagrant
 
-install 'Nokogiri dependencies' libxml2 libxml2-dev libxslt1-dev
+install 'Nokogiri dependencies' zlib1g-dev libxml2 libxml2-dev libxslt1-dev
 
 # Install NodeJS v0.12.x
 echo 'Setting up NodeJS 0.12.x source'
