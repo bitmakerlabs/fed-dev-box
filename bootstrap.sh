@@ -40,6 +40,9 @@ update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
 echo installing Sass
 gem install sass -N >/dev/null 2>&1
 
+echo installing Rails
+gem install rails -N >/dev/null 2>&1
+
 # Install Yeoman (+ dependencies) and Bitmaker Generator
 echo 'Installing global npm dependencies'
 npm install -g yo
@@ -48,4 +51,4 @@ npm install -g bower
 npm install -g generator-bitmaker
 
 
-echo 'all set, rock on!'
+echo 'All set, rock on!'
