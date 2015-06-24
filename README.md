@@ -40,17 +40,22 @@ Your projects will live in the `projects` subfolder of `fed-dev-box`. To get sta
 5. Run `grunt` to start watching your files for changes
 6. Switch over to Sublime Text and open your project folder via `File -> Open`
 7. Open your web browser to `http://localhost:9000` to see the changes as you make them
-
+8. To terminate the grunt task, press `ctrl + c`
+9. Type `exit` to get out of Vagrant
+10. Run `vagrant suspend` to finish your session with Vagrant 
 
 ### Working on existing projects
 
-1. In the root folder of `fed-dev-box` run `vagrant ssh`
-2. When it connects, switch into the projects folder with `cd projects`
-3. Switch into your project directory (`cd my-project`)
-4. Run `grunt` to start watching your files for changes
-5. Switch over to Sublime Text and open your project folder via `File -> Open`
-6. Open your web browser to `http://localhost:9000` to see the changes as you make them
-
+1. In the root folder of `fed-dev-box` run `vagrant up`
+2. Next, run `vagrant ssh`
+3. When it connects, switch into the projects folder with `cd projects`
+4. Switch into your project directory (`cd my-project`)
+5. Run `grunt` to start watching your files for changes
+6. Switch over to Sublime Text and open your project folder via `File -> Open`
+7. Open your web browser to `http://localhost:9000` to see the changes as you make them
+8. To terminate the grunt task, press `ctrl + c`
+9. Type `exit` to get out of Vagrant
+10. Run `vagrant suspend` to finish your session with Vagrant 
 
 ---
 This repository was inspired by the [rails-dev-box](https://github.com/rails/rails-dev-box) repo used for Rails core development.
