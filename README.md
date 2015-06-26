@@ -21,6 +21,7 @@ These three pieces of software have easy-to-use, click-through installers for al
 2. Clone this repository to your computer (`git clone ...`)
 3. Move into the directory for the repository (`cd fed-dev-box`)
 4. Run `VBoxManage dhcpserver remove --netname HostInterfaceNetworking-vboxnet0`
+  - Copying and pasting is simplest
 5. To execute the vagrant script, run `vagrant up`
   - This may take several minutes to complete
 
