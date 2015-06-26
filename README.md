@@ -20,7 +20,8 @@ These three pieces of software have easy-to-use, click-through installers for al
 1. Open Terminal (Mac) or Git Bash (Windows)
 2. Clone this repository to your computer (`git clone ...`)
 3. Move into the directory for the repository (`cd fed-dev-box`)
-4. Run `vagrant up`
+4. Run `VBoxManage dhcpserver remove --netname HostInterfaceNetworking-vboxnet0`
+5. To execute the vagrant script, run `vagrant up`
   - This may take several minutes to complete
 
 Once these steps are complete, you will have a fully working Linux environment for your code.
@@ -32,30 +33,31 @@ Your projects will live in the `projects` subfolder of `fed-dev-box`. To get sta
 
 ### Creating a new project
 
-1. In the root folder of `fed-dev-box` run `vagrant ssh`
-2. When it connects, switch into the projects folder with `cd projects`
-3. Run `yo bitmaker` to generate a new project
+1. In the root folder of `fed-dev-box` run `vagrant up`
+2. Connect to Vagrant (`vagrant ssh`)
+3. When it connects, switch into the projects folder with `cd projects`
+4. Run `yo bitmaker` to generate a new project
   - Follow the prompts to customize your projects to your needs
-4. Once the generator is finished, switch into your new project directory (`cd my-project`)
-5. Run `grunt` to start watching your files for changes
-6. Switch over to Sublime Text and open your project folder via `File -> Open`
-7. Open your web browser to `http://localhost:9000` to see the changes as you make them
-8. To terminate the grunt task, press `ctrl + c`
-9. Type `exit` to get out of Vagrant
-10. Run `vagrant suspend` to finish your session with Vagrant 
+5. Once the generator is finished, switch into your new project directory (`cd my-project`)
+6. Run `grunt` to start watching your files for changes
+7. Switch over to Sublime Text and open your project folder via `File -> Open`
+8. Open your web browser to `http://localhost:9000` to see the changes as you make them
 
 ### Working on existing projects
 
 1. In the root folder of `fed-dev-box` run `vagrant up`
-2. Next, run `vagrant ssh`
+2. Connect to Vagrant (`vagrant ssh`)
 3. When it connects, switch into the projects folder with `cd projects`
 4. Switch into your project directory (`cd my-project`)
 5. Run `grunt` to start watching your files for changes
 6. Switch over to Sublime Text and open your project folder via `File -> Open`
 7. Open your web browser to `http://localhost:9000` to see the changes as you make them
-8. To terminate the grunt task, press `ctrl + c`
-9. Type `exit` to get out of Vagrant
-10. Run `vagrant suspend` to finish your session with Vagrant 
+
+### Terminating your session
+
+1. Stop the grunt task by presssing `ctrl + c`
+2. Type `exit` to get out of Vagrant
+3. Run `vagrant suspend` to finish your session with Vagrant 
 
 ---
 This repository was inspired by the [rails-dev-box](https://github.com/rails/rails-dev-box) repo used for Rails core development.
