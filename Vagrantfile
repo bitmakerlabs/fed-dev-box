@@ -39,7 +39,7 @@ Vagrant.configure(2) do |config|
       # Fixed in next version of vagrant (1.7.3)
       # https://github.com/mitchellh/vagrant/pull/5495
       v.customize ["sharedfolder", "add", :id, "--name", "projects", "--hostpath", (("//?/" + File.dirname(__FILE__) + "/projects").gsub("/","\\"))]
-      override.vm.provision :shell, inline: "mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` www /home/vagrant/www", run: "always"
+      override.vm.provision :shell, inline: "mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` projects /home/vagrant/projects", run: "always"
 
       # Allow symlinks on Windows
       # Windows users must also use the --no-bin-links switch whenever using 'npm install'
