@@ -34,6 +34,10 @@ echo 'Setting up NodeJS 0.12.x source'
 curl -sL https://deb.nodesource.com/setup_0.12 | bash - >/dev/null 2>&1
 install NodeJS nodejs
 
+echo 'Setting up NFS File Caching'
+apt-get install cachefilesd
+echo "RUN=yes" > /etc/default/cachefilesd
+
 # Needed for docs generation.
 update-locale LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
@@ -49,6 +53,5 @@ npm install -g yo
 npm install -g grunt-cli
 npm install -g bower
 npm install -g generator-bitmaker
-
 
 echo 'All set, rock on!'
