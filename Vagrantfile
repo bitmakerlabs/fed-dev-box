@@ -12,14 +12,16 @@ Vagrant.configure(2) do |config|
   # Port 35729 is required by LiveReload to reflect content changes
   config.vm.network :forwarded_port, guest: 35729, host: 35729
 
-  # Required for NFS to work, using DHCP to dynamically assign an address to box
-  config.vm.network :private_network, type: 'dhcp'
-  # Use NFS for shared folders for better performance (ignored on Windows)
-  # Extra optimizations for mount_options from: https://www.jverdeyen.be/vagrant/speedup-vagrant-nfs/
-  config.vm.synced_folder './projects', '/home/vagrant/projects', type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=2']
-
   config.vm.provider 'virtualbox' do |v, override|
     host = RbConfig::CONFIG['host_os']
+
+    if host =~ /darwin/ || host =~ /linux/
+      # Required for NFS to work, using DHCP to dynamically assign an address to box
+      config.vm.network :private_network, type: 'dhcp'
+      # Use NFS for shared folders for better performance (ignored on Windows)
+      # Extra optimizations for mount_options from: https://www.jverdeyen.be/vagrant/speedup-vagrant-nfs/
+      config.vm.synced_folder './projects', '/home/vagrant/projects', type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=2']
+    end
 
     # Performance tuning taken from: https://stefanwrobel.com/how-to-make-vagrant-performance-not-suck
     # Give VM 1/4 system memory & access to all cpu cores on the host
@@ -38,11 +40,15 @@ Vagrant.configure(2) do |config|
       # Patch vagrant itself for Windows machines to use UNC paths without 256 char limit
       # Fixed in next version of vagrant (1.7.3)
       # https://github.com/mitchellh/vagrant/pull/5495
-      v.customize ["sharedfolder", "add", :id, "--name", "projects", "--hostpath", (("//?/" + File.dirname(__FILE__) + "/projects").gsub("/","\\"))]
+      v.customize ["sharedfolder", "add", :id, "--name", "projects", "--hostpath", (("\\\\?\\" + File.dirname(__FILE__) + "/projects").gsub("/","\\"))]
+      override.vm.provision :shell, inline: "mkdir /home/vagrant/projects"
       override.vm.provision :shell, inline: "mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` projects /home/vagrant/projects", run: "always"
 
       # Allow symlinks on Windows
       # Windows users must also use the --no-bin-links switch whenever using 'npm install'
+      # Only works if user is Administrator and shell is Run as Administrator
+      # Vagrant + Windows: http://perrymitchell.net/article/npm-symlinks-through-vagrant-windows/
+      # Further discussion with caveats: http://kmile.nl/post/73956428426/npm-vagrant-and-symlinks-on-windows
       v.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root', '1']
     end
 
