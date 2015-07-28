@@ -75,7 +75,7 @@ Your projects will live in the `projects` subfolder of `fed-dev-box`. To get sta
 
 
 ## General Troubleshooting
-1. Run `vagrant reload` to restart from the Vagrantfile
+1. When all else fails, run `vagrant reload` to restart from the Vagrantfile
 
 ---
 This repository was inspired by the [rails-dev-box](https://github.com/rails/rails-dev-box) repo used for Rails core development.
